@@ -229,6 +229,7 @@ The frontend is crafted using **React 19**, **TypeScript**, **Vite**, and **Tail
 * **Instant Demo Runner:** One-click execution of Clean vs. Tampered demonstration bundles.
 * **Interactive Review Drawer:** Commits reviewer decisions with cryptographic hash-chaining.
 * **Official Court Dossier Downloader:** ReportLab PDF & JSON export conforming to PS-2 Section 7.
+* 📖 **In-Depth Workbench Architecture & Redesign Guide:** For an exhaustive technical breakdown of state, 3-column layouts, coordinate normalization math, 200 DPI canvas, and recipes for redesigning the UI, see [**`docs/WORKBENCH_UI_ARCHITECTURE.md`**](docs/WORKBENCH_UI_ARCHITECTURE.md).
 
 ### Global Command Palette (<kbd>Ctrl+K</kbd> / <kbd>Cmd+K</kbd>)
 * Accessible from anywhere in the application. Jump to any scene, launch demo cases, open workbench views, or export dossiers instantaneously.
@@ -559,7 +560,8 @@ VeriStrata-CEIE/
 │   ├── DECISIONS.md                  # Architectural design choices
 │   └── PRE-DELIVERY-CHECKLIST.md     # Verification checklist
 ├── docs/
-│   └── DEMO_SCRIPT.md                # 2-minute judge walkthrough pitch script
+│   ├── DEMO_SCRIPT.md                # 2-minute judge walkthrough pitch script
+│   └── WORKBENCH_UI_ARCHITECTURE.md  # Exhaustive Workbench UI architecture & LLM redesign blueprint
 ├── frontend/
 │   ├── src/
 │   │   ├── components/               # Workbench views, Three.js 3D canvas, Navbar, Modals
