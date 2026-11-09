@@ -1,0 +1,25 @@
+{
+  "bundle_type": "tampered_positive",
+  "description": "Manipulated payslip (Net Pay INR 95,000) conflicting with authentic bank statement (INR 65,000) and employer declaration (INR 65,000). Leaves INR 30,000 unexplained.",
+  "expected_conflicts": [
+    "RULE-PAYSLIP-ARITH-01",
+    "RULE-CROSS-EMP-01",
+    "RULE-CROSS-BANK-01"
+  ],
+  "expected_residual_inr": 30000.0,
+  "expected_hypothesis_outcomes": {
+    "split_credit": "REJECTED",
+    "posting_delay": "REJECTED",
+    "gross_net_confusion": "REJECTED"
+  },
+  "expected_status": "potential_manipulation",
+  "mutation_manifest": [
+    {
+      "document": "02_salary_slip.pdf",
+      "field": "net_pay",
+      "original_value": "INR 65,000",
+      "tampered_value": "INR 95,000",
+      "mutation_type": "arithmetic_and_context_alteration"
+    }
+  ]
+}

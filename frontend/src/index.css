@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ground: #07090c;
+  --color-panel: #0e1218;
+  --color-panel-2: #151b24;
+  --color-line: #1f2733;
+  --color-line-strong: #3a4757;
+  --color-text: #e8e6df;
+  --color-muted: #aab4c2;
+  --color-dim: #8e98a6;
+  --color-paper: #e9e4d4;
+  --color-ink: #14120d;
+  --color-lime: #c6f432;
+  --color-ruby: #ff4d6a;
+  --color-ruby-text: #ff8da0;
+  --color-cyan: #5ce1e6;
+  --color-amber: #f5a524;
+
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius-panel: 14px;
+  --radius-pill: 999px;
+  --radius-paper: 6px;
+
+  --ease-autopsy: cubic-bezier(.22, 1, .36, 1);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #07090c;
+    color: #e8e6df;
+    font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Accessible Focus Rings */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #c6f432 !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07090c;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2733;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a4757;
+}
+
+/* Tokens Utility Classes */
+.kicker {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8e98a6;
+  font-weight: 600;
+}
+
+.chip {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  background: rgba(14, 18, 24, 0.88);
+  border: 1px solid #3a4757;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #e8e6df;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tabular-mono {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.serif-display {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+/* 3D Transform Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+.perspective-1600 {
+  perspective: 1600px;
+}
+
+/* Autopsy Hairlines Grid */
+.autopsy-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Scan Laser Sweep */
+@keyframes sweepLaser {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.animate-laser {
+  animation: sweepLaser 5.5s cubic-bezier(.22, 1, .36, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-laser {
+    animation: none !important;
+    display: none !important;
+  }
+}

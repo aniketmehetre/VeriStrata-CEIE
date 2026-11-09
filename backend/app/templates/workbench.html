@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TraceDoc CEIE — Forensic Investigation Workbench</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #090d16; color: #cbd5e1; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .badge-sat { background-color: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+    .badge-unsat { background-color: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-warn { background-color: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .glass { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
+    .glass-active { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.15); }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #090d16; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+  <!-- Top App Navigation Bar -->
+  <header class="h-14 glass px-6 flex items-center justify-between border-b border-slate-800 z-20">
+    <div class="flex items-center space-x-3">
+      <div class="w-8 h-8 rounded bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/20">
+        TD
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-white tracking-wide text-sm">TRACEDOC</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded font-semibold bg-cyan-950 text-cyan-400 border border-cyan-800 mono">CEIE v1.1</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Counterfactual Evidence Investigation Engine</p>
+      </div>
+    </div>
+
+    <!-- Case Status Banner -->
+    <div class="flex items-center space-x-6 text-xs">
+      <div class="flex items-center space-x-2">
+        <span class="text-slate-500">Case ID:</span>
+        <span class="mono text-slate-300 font-semibold" id="display-case-id">__CASE_ID__</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="text-slate-500">Status:</span>
+        <span class="px-2 py-0.5 rounded text-[11px] font-semibold __STATUS_CLASS__" id="display-case-status">__CASE_STATUS__</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="text-slate-500">Provenance:</span>
+        <span class="mono text-emerald-400 text-[11px] flex items-center"><i data-lucide="shield-check" class="w-3.5 h-3.5 mr-1"></i> SHA-256 Verified</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center space-x-3">
+      <a href="/api/cases/__CASE_ID__/dossier?format=json" target="_blank" class="px-3 py-1.5 rounded text-xs font-medium glass hover:bg-slate-800 text-slate-200 transition flex items-center">
+        <i data-lucide="file-json" class="w-3.5 h-3.5 mr-1.5 text-cyan-400"></i> JSON Dossier
+      </a>
+      <a href="/api/cases/__CASE_ID__/dossier?format=pdf" target="_blank" class="px-3.5 py-1.5 rounded text-xs font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/20 transition flex items-center">
+        <i data-lucide="download" class="w-3.5 h-3.5 mr-1.5"></i> Export Official PDF
+      </a>
+    </div>
+  </header>
+
+  <!-- Main 3-Column Forensic Workstation -->
+  <main class="flex-1 flex overflow-hidden">
+
+    <!-- Column 1: Document Evidence Shelf (w-72) -->
+    <aside class="w-72 glass border-r border-slate-800/80 flex flex-col z-10">
+      <div class="p-3 border-b border-slate-800 flex items-center justify-between">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Bundle Documents</span>
+        <span class="text-[11px] mono text-cyan-400 font-medium" id="doc-count">__DOC_COUNT__ items</span>
+      </div>
+      <div class="flex-1 overflow-y-auto p-2 space-y-2" id="doc-list">
+        __DOC_ITEMS_HTML__
+      </div>
+      <!-- Audit Ledger Footer -->
+      <div class="p-3 border-t border-slate-800 bg-slate-950/40 text-[11px]">
+        <div class="flex justify-between items-center text-slate-400 mb-1">
+          <span>Audit Chain</span>
+          <span class="mono text-emerald-400 text-[10px]">__AUDIT_COUNT__ Events</span>
+        </div>
+        <div class="text-[10px] text-slate-500 truncate mono">Root: __ROOT_HASH__</div>
+      </div>
+    </aside>
+
+    <!-- Column 2: Document Inspection & Page Coordinates (flex-1) -->
+    <section class="flex-1 flex flex-col bg-slate-950/60 relative overflow-hidden">
+      <!-- Toolbar -->
+      <div class="h-10 px-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/40 text-xs">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="file-search" class="w-4 h-4 text-cyan-400"></i>
+          <span class="font-medium text-slate-200" id="current-doc-name">Viewing Primary Evidence Crop</span>
+        </div>
+        <div class="flex items-center space-x-3 text-slate-400 text-[11px]">
+          <span>Zoom: <b class="text-slate-300">100%</b></span>
+          <span>DPI: <b class="text-slate-300">200 DPI</b></span>
+          <span class="mono text-cyan-400 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-800/50">Forensic Overlay Active</span>
+        </div>
+      </div>
+
+      <!-- Canvas / Viewer Area -->
+      <div class="flex-1 overflow-auto p-6 flex flex-col items-center justify-center relative" id="viewer-container">
+        <div class="max-w-2xl w-full glass rounded-xl p-5 shadow-2xl relative border border-slate-700/60">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span class="font-semibold text-sm text-slate-100" id="crop-field-title">Net Pay Amount Field Anchor</span>
+            </div>
+            <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800">Confidence: 95.0%</span>
+          </div>
+
+          <!-- Highlight Box Preview -->
+          <div class="bg-slate-900/90 rounded-lg p-6 border border-slate-800 flex flex-col items-center justify-center min-h-[180px] relative overflow-hidden" id="evidence-crop-box">
+            __CROP_PREVIEW_HTML__
+          </div>
+
+          <div class="mt-4 grid grid-cols-3 gap-2 text-[11px] mono">
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800">
+              <div class="text-slate-500">Document</div>
+              <div class="text-slate-200 truncate mt-0.5">__DOC_TITLE__</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800">
+              <div class="text-slate-500">Coordinates (Norm)</div>
+              <div class="text-slate-200 truncate mt-0.5" id="coord-val">[0.38, 0.42, 0.62, 0.48]</div>
+            </div>
+            <div class="p-2 rounded bg-slate-900/80 border border-slate-800">
+              <div class="text-slate-500">Extractor Engine</div>
+              <div class="text-slate-200 truncate mt-0.5">PyMuPDF / v1.26</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Column 3: Counterfactual Engine & Minimal Witness (w-[420px]) -->
+    <aside class="w-[440px] glass border-l border-slate-800/80 flex flex-col z-10">
+      <div class="p-3 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="cpu" class="w-4 h-4 text-cyan-400"></i>
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-300">Z3 Hypothesis Engine</span>
+        </div>
+        <span class="text-[10px] px-2 py-0.5 rounded font-mono badge-unsat font-semibold" id="discrepancy-status">UNRESOLVED WITNESS</span>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-3 space-y-4">
+
+        <!-- Minimal Contradiction Witness Box -->
+        <div class="glass rounded-lg p-3.5 border-l-4 border-l-red-500">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-red-400 flex items-center">
+              <i data-lucide="alert-octagon" class="w-3.5 h-3.5 mr-1.5"></i> Minimal Contradiction Witness
+            </span>
+            <span class="mono text-[11px] text-slate-400">3 Claims Conflict</span>
+          </div>
+          <p class="text-[11px] text-slate-300 mb-3 leading-relaxed">
+            The following smallest claim subset cannot simultaneously hold true under domain financial constraints:
+          </p>
+          <div class="space-y-1.5 text-xs">
+            __WITNESS_CLAIMS_HTML__
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-slate-800 flex justify-between items-center text-[11px]">
+            <span class="text-slate-400">Unexplained Residual:</span>
+            <span class="mono font-bold text-red-400 text-sm">__RESIDUAL_INR__</span>
+          </div>
+        </div>
+
+        <!-- Evaluated Counterfactual Hypotheses -->
+        <div>
+          <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
+            <span>Benign Explanations Tested</span>
+            <span class="text-[10px] mono text-slate-500">Z3 Theorem Prover</span>
+          </div>
+
+          <div class="space-y-2">
+            __HYPOTHESES_CARDS_HTML__
+          </div>
+        </div>
+
+        <!-- Human Review & Oversight Panel -->
+        <div class="glass rounded-lg p-3.5 border border-slate-700/60">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-slate-200 flex items-center">
+              <i data-lucide="user-check" class="w-3.5 h-3.5 mr-1.5 text-cyan-400"></i> Human Reviewer Action
+            </span>
+            <span class="text-[10px] mono text-slate-400">Mandatory Oversight</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mb-3">
+            Record a digitally signed reviewer decision. This action is permanently committed to the immutable hash chain.
+          </p>
+          <form id="review-form" class="space-y-2.5">
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">Decision</label>
+              <select id="review-action" class="w-full text-xs bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-cyan-500">
+                <option value="accept">Accept — Confirm Discrepancy Observation</option>
+                <option value="dismiss">Dismiss — Mark Legitimate / False Positive</option>
+                <option value="annotate">Annotate — Under Investigation</option>
+                <option value="request_more_info">Request Additional Documents</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">Reviewer Note / Justification</label>
+              <textarea id="review-reason" rows="2" class="w-full text-xs bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500" placeholder="e.g. Verified INR 30,000 discrepancy against employer records..."></textarea>
+            </div>
+            <button type="button" onclick="submitReview()" class="w-full py-1.5 rounded text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition shadow-md shadow-cyan-600/20">
+              Commit Action to Audit Chain
+            </button>
+            <div id="review-msg" class="text-[11px] text-center hidden"></div>
+          </form>
+        </div>
+
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    async function submitReview() {
+      const action = document.getElementById('review-action').value;
+      const reason = document.getElementById('review-reason').value;
+      const msg = document.getElementById('review-msg');
+      const findingId = '__FIRST_FINDING_ID__';
+
+      if (!findingId || findingId === '__FIRST_FINDING_ID__') {
+        msg.className = "text-[11px] text-center text-amber-400 block";
+        msg.textContent = "No active finding to review.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/findings/${findingId}/review`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action, reason: reason || 'Audit decision confirmed by reviewer', annotation: 'Workbench live review' })
+        });
+        if (res.ok) {
+          msg.className = "text-[11px] text-center text-emerald-400 block font-semibold";
+          msg.textContent = "Decision committed! SHA-256 event appended to audit chain.";
+          setTimeout(() => location.reload(), 1500);
+        } else {
+          const err = await res.json();
+          msg.className = "text-[11px] text-center text-red-400 block";
+          msg.textContent = err.detail || "Review failed";
+        }
+      } catch (e) {
+        msg.className = "text-[11px] text-center text-red-400 block";
+        msg.textContent = e.message;
+      }
+    }
+  </script>
+</body>
+</html>
+

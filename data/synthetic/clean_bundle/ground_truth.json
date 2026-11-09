@@ -1,0 +1,11 @@
+{
+  "bundle_type": "clean_hard_negative",
+  "description": "Clean case with split salary payment (40,000 + 25,000) reconciling payslip net pay INR 65,000.",
+  "expected_findings": [],
+  "expected_hypothesis_outcomes": {
+    "split_credit": "SUPPORTED",
+    "posting_delay": "SUPPORTED"
+  },
+  "expected_status": "observation",
+  "expected_residual_inr": 0.0
+}
