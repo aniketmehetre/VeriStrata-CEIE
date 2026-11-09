@@ -9,6 +9,7 @@ import { NewCaseModal } from './components/NewCaseModal';
 import { StoryPage } from './story/StoryPage';
 import { StyleguidePage } from './story/StyleguidePage';
 import { CommandPalette } from './ui/vendor/CommandPalette';
+import { GuidedAutopilot } from './ui/interactions/GuidedAutopilot';
 import type { CommandAction } from './ui/vendor/CommandPalette';
 import type { Case, HealthInfo, Finding } from './types';
 import { fetchCases, fetchHealth, createDemoCase } from './api';
@@ -218,6 +219,19 @@ export function App() {
       },
     },
     {
+      id: 'autopilot-tour',
+      title: 'Start Full Guided Autopilot Walkthrough Tour',
+      category: 'Tour & Pitch',
+      icon: Sparkles,
+      shortcut: 'P',
+      onSelect: () => {
+        window.location.hash = '#/';
+        setTimeout(() => {
+          document.getElementById('scene-0')?.scrollIntoView({ behavior: 'smooth' });
+        }, 60);
+      },
+    },
+    {
       id: 'open-studio',
       title: 'Open Full Investigation Studio',
       category: 'Workbench',
@@ -378,6 +392,9 @@ export function App() {
           onClose={() => setIsPaletteOpen(false)}
           actions={paletteActions}
         />
+
+        {/* In-App Guided Autopilot Tour */}
+        <GuidedAutopilot />
       </div>
     );
   }
@@ -405,6 +422,9 @@ export function App() {
           Ctrl+K
         </kbd>
       </button>
+
+      {/* In-App Guided Autopilot Tour */}
+      <GuidedAutopilot />
 
       {/* Dossier Modal */}
       {currentCaseId && (
