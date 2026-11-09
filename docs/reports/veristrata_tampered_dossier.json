@@ -1,0 +1,851 @@
+{
+  "dossier_id": "ce3c52f9-1e24-41b1-ac88-72a0544e6467",
+  "case_id": "CASE-TAMPERED-A9EE9D99",
+  "bundle_type": "LOAN_APPLICATION",
+  "generated_at": "2026-11-09T19:57:10.193326+00:00",
+  "system_name": "VeriStrata CEIE v1.1.0",
+  "standards_aligned": [
+    "ISO/IEC 27037: Guidelines for identification, collection, acquisition, and preservation of digital evidence.",
+    "ISO/IEC 27041 / 27042: Guidance on assuring suitability and interpretation of digital investigative methods.",
+    "NIST SP 800-86: Guide to Integrating Forensic Techniques into Incident Response.",
+    "OWASP Machine Learning Security Top 10: Robustness, data integrity, and explainability considerations."
+  ],
+  "sha256_manifest": {
+    "7c5ca3bf-b324-4104-a5d7-5909d954e15b": "1637175c5682b201b26374660a4ab382f563711603492bd9ae411916fc77644c",
+    "e35b8b8f-b32c-4a30-b931-c58119c502b8": "5bd44044017069def3df149259067e7e8c1afe8e00957b85b069180029730e90",
+    "ffe9486c-f8ef-42ce-8893-95388736133d": "b731d10cfa38d4b1614499eb91e7d4a71d274a7fb056e56dee97f4c12a04491f",
+    "abf617da-1846-4d6b-b653-0fef081be120": "ab4c760cdb296923608fcd9041f330ef87847f10cb351e604c8888a9fa4bbfdd"
+  },
+  "documents": [
+    {
+      "document_id": "7c5ca3bf-b324-4104-a5d7-5909d954e15b",
+      "case_id": "CASE-TAMPERED-A9EE9D99",
+      "original_sha256": "1637175c5682b201b26374660a4ab382f563711603492bd9ae411916fc77644c",
+      "media_type": "application/pdf",
+      "page_count": 1,
+      "source_name": "01_application_form.pdf",
+      "classification": "APPLICATION_FORM",
+      "classification_confidence": 1.3,
+      "status": "classified",
+      "created_at": "2026-11-09T19:57:07.085387+00:00"
+    },
+    {
+      "document_id": "e35b8b8f-b32c-4a30-b931-c58119c502b8",
+      "case_id": "CASE-TAMPERED-A9EE9D99",
+      "original_sha256": "5bd44044017069def3df149259067e7e8c1afe8e00957b85b069180029730e90",
+      "media_type": "application/pdf",
+      "page_count": 1,
+      "source_name": "02_salary_slip.pdf",
+      "classification": "SALARY_SLIP",
+      "classification_confidence": 0.9666666666666666,
+      "status": "classified",
+      "created_at": "2026-11-09T19:57:07.298903+00:00"
+    },
+    {
+      "document_id": "ffe9486c-f8ef-42ce-8893-95388736133d",
+      "case_id": "CASE-TAMPERED-A9EE9D99",
+      "original_sha256": "b731d10cfa38d4b1614499eb91e7d4a71d274a7fb056e56dee97f4c12a04491f",
+      "media_type": "application/pdf",
+      "page_count": 1,
+      "source_name": "03_bank_statement.pdf",
+      "classification": "BANK_STATEMENT",
+      "classification_confidence": 0.9666666666666666,
+      "status": "classified",
+      "created_at": "2026-11-09T19:57:07.523601+00:00"
+    },
+    {
+      "document_id": "abf617da-1846-4d6b-b653-0fef081be120",
+      "case_id": "CASE-TAMPERED-A9EE9D99",
+      "original_sha256": "ab4c760cdb296923608fcd9041f330ef87847f10cb351e604c8888a9fa4bbfdd",
+      "media_type": "application/pdf",
+      "page_count": 1,
+      "source_name": "04_employer_declaration.pdf",
+      "classification": "EMPLOYER_DECLARATION",
+      "classification_confidence": 1.1,
+      "status": "classified",
+      "created_at": "2026-11-09T19:57:07.743277+00:00"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "ffda3f33-4865-41bc-af7e-cd6558f0d726",
+      "title": "salary_claim_conflict",
+      "status": "potential_manipulation",
+      "priority": "high_review_priority",
+      "finding_type": "salary_claim_conflict",
+      "summary": "",
+      "minimal_witness": [
+        {
+          "claim_id": "bd39a414-bfab-46f5-8a9c-41ff1b059ebd",
+          "document_id": "e35b8b8f-b32c-4a30-b931-c58119c502b8",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.2416,
+            0.4861,
+            0.2572
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "net_pay",
+          "raw_text": "net_pay: INR 95,000",
+          "normalized_value": "9500000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.426356+00:00",
+          "source_name": "02_salary_slip.pdf",
+          "crop_url": "/api/claims/bd39a414-bfab-46f5-8a9c-41ff1b059ebd/crop"
+        },
+        {
+          "claim_id": "cb13ea55-feee-4c68-b2ec-e22040d108e7",
+          "document_id": "abf617da-1846-4d6b-b653-0fef081be120",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.2188,
+            0.4861,
+            0.2345
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "monthly_net_pay",
+          "raw_text": "monthly_net_pay: INR 65,000",
+          "normalized_value": "6500000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.983778+00:00",
+          "source_name": "04_employer_declaration.pdf",
+          "crop_url": "/api/claims/cb13ea55-feee-4c68-b2ec-e22040d108e7/crop"
+        },
+        {
+          "claim_id": "1149be17-abbc-468a-93f9-befeacde741f",
+          "document_id": "ffe9486c-f8ef-42ce-8893-95388736133d",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.2188,
+            0.7706,
+            0.2345
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "salary_credit_row",
+          "raw_text": "04-sep-2026 northstar sal part2 25,000.00 cr",
+          "normalized_value": "2500000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.701225+00:00",
+          "source_name": "03_bank_statement.pdf",
+          "crop_url": "/api/claims/1149be17-abbc-468a-93f9-befeacde741f/crop"
+        },
+        {
+          "claim_id": "07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b",
+          "document_id": "ffe9486c-f8ef-42ce-8893-95388736133d",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.1961,
+            0.7191,
+            0.2117
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "salary_credit_row",
+          "raw_text": "02-sep-2026 northstar sal 40,000.00 cr",
+          "normalized_value": "4000000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.701225+00:00",
+          "source_name": "03_bank_statement.pdf",
+          "crop_url": "/api/claims/07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b/crop"
+        }
+      ],
+      "hypothesis_tests": [
+        {
+          "hypothesis_id": "ef7bb977-d22d-40e6-8abe-ff1daaf38b98",
+          "case_id": "CASE-TAMPERED-A9EE9D99",
+          "constraint_id": "RULE-NETPAY-RECON-01",
+          "name": "split_credit",
+          "assumptions": "{\"allow_multiple_credits\": true, \"tolerance_paise\": 50000, \"tolerance_inr\": 500.0}",
+          "evidence_used": "[\"bd39a414-bfab-46f5-8a9c-41ff1b059ebd\", \"07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b\", \"1149be17-abbc-468a-93f9-befeacde741f\"]",
+          "outcome": "REJECTED",
+          "explanation": "Mathematical Contradiction Isolated: Bank payroll credits total INR 65,000.00, leaving an irreconcilable residual gap of INR 30,000.00 (UNSAT).",
+          "residual_conflict": 30000.0,
+          "solver_version": "z3-5.3.3",
+          "solver_timeout_ms": 5000,
+          "created_at": "2026-11-09T19:57:09.452623+00:00"
+        },
+        {
+          "hypothesis_id": "7191773c-364d-4e98-9214-395ded7f9644",
+          "case_id": "CASE-TAMPERED-A9EE9D99",
+          "constraint_id": "RULE-NETPAY-RECON-01",
+          "name": "posting_delay",
+          "assumptions": "{\"window_days\": 7, \"extended_window_days\": 14}",
+          "evidence_used": "[\"bd39a414-bfab-46f5-8a9c-41ff1b059ebd\", \"07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b\", \"1149be17-abbc-468a-93f9-befeacde741f\"]",
+          "outcome": "REJECTED",
+          "explanation": "Extended Posting Window Ineffective: Scanning 14-day expanded clearing window yields zero additional employer credits; residual gap persists.",
+          "residual_conflict": 30000.0,
+          "solver_version": "z3-5.3.3",
+          "solver_timeout_ms": 5000,
+          "created_at": "2026-11-09T19:57:09.452623+00:00"
+        },
+        {
+          "hypothesis_id": "5dd56b07-5fe6-43bc-ac8b-d25968d1f4f6",
+          "case_id": "CASE-TAMPERED-A9EE9D99",
+          "constraint_id": "RULE-CROSS-EMP-01",
+          "name": "gross_net_confusion",
+          "assumptions": "{\"test_gross_equivalence\": true, \"tolerance_paise\": 50000}",
+          "evidence_used": "[\"bd39a414-bfab-46f5-8a9c-41ff1b059ebd\", \"cb13ea55-feee-4c68-b2ec-e22040d108e7\"]",
+          "outcome": "REJECTED",
+          "explanation": "Gross Pay Mismatch: Payslip gross pay (INR 78,000.00) also fails to reconcile declared compensation (INR 65,000.00).",
+          "residual_conflict": 30000.0,
+          "solver_version": "z3-5.3.3",
+          "solver_timeout_ms": 5000,
+          "created_at": "2026-11-09T19:57:09.452623+00:00"
+        }
+      ],
+      "reviewer_outcome": {
+        "review_id": "e35e8288-45e3-48a3-ad82-48f6e836b589",
+        "finding_id": "ffda3f33-4865-41bc-af7e-cd6558f0d726",
+        "actor": "auditor_automated",
+        "action": "accept",
+        "reason": "Verified against banking credits and multi-strata forensic telemetry.",
+        "timestamp": "2026-11-09T19:57:10.027234+00:00",
+        "previous_event_hash": "e99bc7ebd7fdb26cb5bf6a3237e0d7daaaa8c775ccd2574ed80226c2282a6a17"
+      },
+      "uncertainty_profile": {
+        "extraction": 0.95,
+        "localization": 0.93,
+        "reconciled": false,
+        "residual_inr": 30000.0,
+        "corroborating_families_count": 3
+      }
+    }
+  ],
+  "limitations": [
+    "OCR quality may affect extraction confidence on low-contrast, skewed, or degraded scans; raw bounding boxes are preserved.",
+    "Visual pixel signals reflect recompression and quantization variance; contextual verification is strictly required.",
+    "Z3 SMT solver evaluates domain-valid arithmetic and relational hypotheses; UNKNOWN outcomes are escalated to human review.",
+    "Human reviewer oversight is preserved for all consequential legal and credit underwriting decisions."
+  ],
+  "section_7_1_document_overview": {
+    "case_id": "CASE-TAMPERED-A9EE9D99",
+    "bundle_type": "LOAN_APPLICATION",
+    "status": "created",
+    "documents": [
+      {
+        "document_id": "7c5ca3bf-b324-4104-a5d7-5909d954e15b",
+        "source_name": "01_application_form.pdf",
+        "classification": "APPLICATION_FORM",
+        "confidence": 1.3,
+        "sha256": "1637175c5682b201b26374660a4ab382f563711603492bd9ae411916fc77644c",
+        "pages": 1,
+        "status": "classified"
+      },
+      {
+        "document_id": "e35b8b8f-b32c-4a30-b931-c58119c502b8",
+        "source_name": "02_salary_slip.pdf",
+        "classification": "SALARY_SLIP",
+        "confidence": 0.9666666666666666,
+        "sha256": "5bd44044017069def3df149259067e7e8c1afe8e00957b85b069180029730e90",
+        "pages": 1,
+        "status": "classified"
+      },
+      {
+        "document_id": "ffe9486c-f8ef-42ce-8893-95388736133d",
+        "source_name": "03_bank_statement.pdf",
+        "classification": "BANK_STATEMENT",
+        "confidence": 0.9666666666666666,
+        "sha256": "b731d10cfa38d4b1614499eb91e7d4a71d274a7fb056e56dee97f4c12a04491f",
+        "pages": 1,
+        "status": "classified"
+      },
+      {
+        "document_id": "abf617da-1846-4d6b-b653-0fef081be120",
+        "source_name": "04_employer_declaration.pdf",
+        "classification": "EMPLOYER_DECLARATION",
+        "confidence": 1.1,
+        "sha256": "ab4c760cdb296923608fcd9041f330ef87847f10cb351e604c8888a9fa4bbfdd",
+        "pages": 1,
+        "status": "classified"
+      }
+    ]
+  },
+  "section_7_2_extracted_information": [
+    {
+      "claim_id": "81e0aced-e4ff-4c0d-abd8-74a9dd673fe5",
+      "source_document": "03_bank_statement.pdf",
+      "field_name": "account_holder",
+      "raw_text": "account_holder: Rohan Mehta",
+      "normalized_value": "Rohan Mehta",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1279,
+        0.5,
+        0.1435
+      ],
+      "crop_endpoint": "/api/claims/81e0aced-e4ff-4c0d-abd8-74a9dd673fe5/crop"
+    },
+    {
+      "claim_id": "1eab861b-7e4b-4fdd-9d49-e4b58b003de2",
+      "source_document": "01_application_form.pdf",
+      "field_name": "applicant_name",
+      "raw_text": "applicant_name: Rohan Mehta",
+      "normalized_value": "Rohan Mehta",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1279,
+        0.5,
+        0.1435
+      ],
+      "crop_endpoint": "/api/claims/1eab861b-7e4b-4fdd-9d49-e4b58b003de2/crop"
+    },
+    {
+      "claim_id": "08aebceb-cab4-4b68-95e3-15df2542f573",
+      "source_document": "01_application_form.pdf",
+      "field_name": "application_date",
+      "raw_text": "application_date: 2026-09-05",
+      "normalized_value": "2026-09-05",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.2188,
+        0.487,
+        0.2345
+      ],
+      "crop_endpoint": "/api/claims/08aebceb-cab4-4b68-95e3-15df2542f573/crop"
+    },
+    {
+      "claim_id": "cc9e3c05-ddeb-4858-ab9a-7bb23f258c0f",
+      "source_document": "01_application_form.pdf",
+      "field_name": "declared_income",
+      "raw_text": "declared_income: INR 95,000",
+      "normalized_value": "9500000",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1734,
+        0.4861,
+        0.189
+      ],
+      "crop_endpoint": "/api/claims/cc9e3c05-ddeb-4858-ab9a-7bb23f258c0f/crop"
+    },
+    {
+      "claim_id": "c41c7794-76f7-475a-9b13-24c245ab3f02",
+      "source_document": "02_salary_slip.pdf",
+      "field_name": "deductions",
+      "raw_text": "deductions: INR 13,000",
+      "normalized_value": "1300000",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.2188,
+        0.4861,
+        0.2345
+      ],
+      "crop_endpoint": "/api/claims/c41c7794-76f7-475a-9b13-24c245ab3f02/crop"
+    },
+    {
+      "claim_id": "cee3f141-625d-44df-8778-a10bc0b4cbca",
+      "source_document": "02_salary_slip.pdf",
+      "field_name": "employee_name",
+      "raw_text": "employee_name: Rohan Mehta",
+      "normalized_value": "Rohan Mehta",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1279,
+        0.5,
+        0.1435
+      ],
+      "crop_endpoint": "/api/claims/cee3f141-625d-44df-8778-a10bc0b4cbca/crop"
+    },
+    {
+      "claim_id": "2efc3fb3-f876-4954-a034-12ac5747204e",
+      "source_document": "04_employer_declaration.pdf",
+      "field_name": "employee_name",
+      "raw_text": "employee_name: Rohan Mehta",
+      "normalized_value": "Rohan Mehta",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1279,
+        0.5,
+        0.1435
+      ],
+      "crop_endpoint": "/api/claims/2efc3fb3-f876-4954-a034-12ac5747204e/crop"
+    },
+    {
+      "claim_id": "ef7f602a-ef6e-47da-a4bb-b73118199d60",
+      "source_document": "01_application_form.pdf",
+      "field_name": "employer_name",
+      "raw_text": "employer_name: Northstar Components Pvt Ltd",
+      "normalized_value": "Northstar Components Pvt Ltd",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1507,
+        0.6096,
+        0.1663
+      ],
+      "crop_endpoint": "/api/claims/ef7f602a-ef6e-47da-a4bb-b73118199d60/crop"
+    },
+    {
+      "claim_id": "f6dec29d-8f1c-4679-ae91-c38869105db6",
+      "source_document": "02_salary_slip.pdf",
+      "field_name": "employer_name",
+      "raw_text": "employer_name: Northstar Components Pvt Ltd",
+      "normalized_value": "Northstar Components Pvt Ltd",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1507,
+        0.6096,
+        0.1663
+      ],
+      "crop_endpoint": "/api/claims/f6dec29d-8f1c-4679-ae91-c38869105db6/crop"
+    },
+    {
+      "claim_id": "26be70e4-5d00-4d9e-836a-6b26a7ebcd2c",
+      "source_document": "04_employer_declaration.pdf",
+      "field_name": "employer_name",
+      "raw_text": "employer_name: Northstar Components Pvt Ltd",
+      "normalized_value": "Northstar Components Pvt Ltd",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1507,
+        0.6096,
+        0.1663
+      ],
+      "crop_endpoint": "/api/claims/26be70e4-5d00-4d9e-836a-6b26a7ebcd2c/crop"
+    },
+    {
+      "claim_id": "20f92319-dc78-4b92-ad66-82d0a476c3c0",
+      "source_document": "02_salary_slip.pdf",
+      "field_name": "gross_pay",
+      "raw_text": "gross_pay: INR 78,000",
+      "normalized_value": "7800000",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1961,
+        0.4861,
+        0.2117
+      ],
+      "crop_endpoint": "/api/claims/20f92319-dc78-4b92-ad66-82d0a476c3c0/crop"
+    },
+    {
+      "claim_id": "ff0d01d6-1a7d-4199-8624-e1ba99b8f70c",
+      "source_document": "02_salary_slip.pdf",
+      "field_name": "month_year",
+      "raw_text": "month_year: September 2026",
+      "normalized_value": "September 2026",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1734,
+        0.5205,
+        0.189
+      ],
+      "crop_endpoint": "/api/claims/ff0d01d6-1a7d-4199-8624-e1ba99b8f70c/crop"
+    },
+    {
+      "claim_id": "cb13ea55-feee-4c68-b2ec-e22040d108e7",
+      "source_document": "04_employer_declaration.pdf",
+      "field_name": "monthly_net_pay",
+      "raw_text": "monthly_net_pay: INR 65,000",
+      "normalized_value": "6500000",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.2188,
+        0.4861,
+        0.2345
+      ],
+      "crop_endpoint": "/api/claims/cb13ea55-feee-4c68-b2ec-e22040d108e7/crop"
+    },
+    {
+      "claim_id": "bd39a414-bfab-46f5-8a9c-41ff1b059ebd",
+      "source_document": "02_salary_slip.pdf",
+      "field_name": "net_pay",
+      "raw_text": "net_pay: INR 95,000",
+      "normalized_value": "9500000",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.2416,
+        0.4861,
+        0.2572
+      ],
+      "crop_endpoint": "/api/claims/bd39a414-bfab-46f5-8a9c-41ff1b059ebd/crop"
+    },
+    {
+      "claim_id": "07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b",
+      "source_document": "03_bank_statement.pdf",
+      "field_name": "salary_credit_row",
+      "raw_text": "02-sep-2026 northstar sal 40,000.00 cr",
+      "normalized_value": "4000000",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1961,
+        0.7191,
+        0.2117
+      ],
+      "crop_endpoint": "/api/claims/07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b/crop"
+    },
+    {
+      "claim_id": "1149be17-abbc-468a-93f9-befeacde741f",
+      "source_document": "03_bank_statement.pdf",
+      "field_name": "salary_credit_row",
+      "raw_text": "04-sep-2026 northstar sal part2 25,000.00 cr",
+      "normalized_value": "2500000",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.2188,
+        0.7706,
+        0.2345
+      ],
+      "crop_endpoint": "/api/claims/1149be17-abbc-468a-93f9-befeacde741f/crop"
+    },
+    {
+      "claim_id": "e3ed7c1b-2ede-4e74-aa45-262aee4d3360",
+      "source_document": "03_bank_statement.pdf",
+      "field_name": "statement_period",
+      "raw_text": "statement_period: 01-Sep-2026 to 30-Sep-2026",
+      "normalized_value": "01-Sep-2026 To 30-Sep-2026",
+      "confidence": 0.95,
+      "page_index": 0,
+      "bbox_norm": [
+        0.4118,
+        0.1507,
+        0.6022,
+        0.1663
+      ],
+      "crop_endpoint": "/api/claims/e3ed7c1b-2ede-4e74-aa45-262aee4d3360/crop"
+    }
+  ],
+  "section_7_3_contextual_analysis": {
+    "evaluated_hypotheses": [
+      {
+        "hypothesis_id": "ef7bb977-d22d-40e6-8abe-ff1daaf38b98",
+        "case_id": "CASE-TAMPERED-A9EE9D99",
+        "constraint_id": "RULE-NETPAY-RECON-01",
+        "name": "split_credit",
+        "assumptions": "{\"allow_multiple_credits\": true, \"tolerance_paise\": 50000, \"tolerance_inr\": 500.0}",
+        "evidence_used": "[\"bd39a414-bfab-46f5-8a9c-41ff1b059ebd\", \"07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b\", \"1149be17-abbc-468a-93f9-befeacde741f\"]",
+        "outcome": "REJECTED",
+        "explanation": "Mathematical Contradiction Isolated: Bank payroll credits total INR 65,000.00, leaving an irreconcilable residual gap of INR 30,000.00 (UNSAT).",
+        "residual_conflict": 30000.0,
+        "solver_version": "z3-5.3.3",
+        "solver_timeout_ms": 5000,
+        "created_at": "2026-11-09T19:57:09.452623+00:00"
+      },
+      {
+        "hypothesis_id": "7191773c-364d-4e98-9214-395ded7f9644",
+        "case_id": "CASE-TAMPERED-A9EE9D99",
+        "constraint_id": "RULE-NETPAY-RECON-01",
+        "name": "posting_delay",
+        "assumptions": "{\"window_days\": 7, \"extended_window_days\": 14}",
+        "evidence_used": "[\"bd39a414-bfab-46f5-8a9c-41ff1b059ebd\", \"07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b\", \"1149be17-abbc-468a-93f9-befeacde741f\"]",
+        "outcome": "REJECTED",
+        "explanation": "Extended Posting Window Ineffective: Scanning 14-day expanded clearing window yields zero additional employer credits; residual gap persists.",
+        "residual_conflict": 30000.0,
+        "solver_version": "z3-5.3.3",
+        "solver_timeout_ms": 5000,
+        "created_at": "2026-11-09T19:57:09.452623+00:00"
+      },
+      {
+        "hypothesis_id": "5dd56b07-5fe6-43bc-ac8b-d25968d1f4f6",
+        "case_id": "CASE-TAMPERED-A9EE9D99",
+        "constraint_id": "RULE-CROSS-EMP-01",
+        "name": "gross_net_confusion",
+        "assumptions": "{\"test_gross_equivalence\": true, \"tolerance_paise\": 50000}",
+        "evidence_used": "[\"bd39a414-bfab-46f5-8a9c-41ff1b059ebd\", \"cb13ea55-feee-4c68-b2ec-e22040d108e7\"]",
+        "outcome": "REJECTED",
+        "explanation": "Gross Pay Mismatch: Payslip gross pay (INR 78,000.00) also fails to reconcile declared compensation (INR 65,000.00).",
+        "residual_conflict": 30000.0,
+        "solver_version": "z3-5.3.3",
+        "solver_timeout_ms": 5000,
+        "created_at": "2026-11-09T19:57:09.452623+00:00"
+      }
+    ],
+    "cross_document_discrepancies": [
+      {
+        "finding_id": "ffda3f33-4865-41bc-af7e-cd6558f0d726",
+        "status": "potential_manipulation",
+        "title": "salary_claim_conflict",
+        "summary": "",
+        "uncertainty_profile": {
+          "extraction": 0.95,
+          "localization": 0.93,
+          "reconciled": false,
+          "residual_inr": 30000.0,
+          "corroborating_families_count": 3
+        }
+      }
+    ]
+  },
+  "section_7_4_visual_forensic_findings": [
+    {
+      "signal_id": "00d026d0-bfe1-466f-97a1-1241ae07cc2a",
+      "source_document": "01_application_form.pdf",
+      "detector_name": "pdf_incremental_revision",
+      "evidence_family": "file_structure",
+      "severity": "medium",
+      "score": 2.0,
+      "bbox_norm": [],
+      "metadata": {}
+    },
+    {
+      "signal_id": "ff263d05-4cef-4037-9f57-1e0627f92676",
+      "source_document": "01_application_form.pdf",
+      "detector_name": "ela",
+      "evidence_family": "visual_pixel",
+      "severity": "medium",
+      "score": 0.204,
+      "bbox_norm": [],
+      "metadata": {}
+    },
+    {
+      "signal_id": "30f79889-373c-4a51-ba46-c62f005c0b3a",
+      "source_document": "02_salary_slip.pdf",
+      "detector_name": "pdf_incremental_revision",
+      "evidence_family": "file_structure",
+      "severity": "medium",
+      "score": 2.0,
+      "bbox_norm": [],
+      "metadata": {}
+    },
+    {
+      "signal_id": "12322949-a5e6-4c7e-a493-60a48cccf00f",
+      "source_document": "02_salary_slip.pdf",
+      "detector_name": "ela",
+      "evidence_family": "visual_pixel",
+      "severity": "medium",
+      "score": 0.227,
+      "bbox_norm": [],
+      "metadata": {}
+    },
+    {
+      "signal_id": "c5ca0a97-94c1-411c-9500-a879815bd31c",
+      "source_document": "03_bank_statement.pdf",
+      "detector_name": "pdf_incremental_revision",
+      "evidence_family": "file_structure",
+      "severity": "medium",
+      "score": 2.0,
+      "bbox_norm": [],
+      "metadata": {}
+    },
+    {
+      "signal_id": "9a283cf7-1812-44ff-a36e-9988ceac19e9",
+      "source_document": "03_bank_statement.pdf",
+      "detector_name": "ela",
+      "evidence_family": "visual_pixel",
+      "severity": "medium",
+      "score": 0.22,
+      "bbox_norm": [],
+      "metadata": {}
+    },
+    {
+      "signal_id": "ff10c766-4168-49ac-ba36-8b2cde547975",
+      "source_document": "04_employer_declaration.pdf",
+      "detector_name": "pdf_incremental_revision",
+      "evidence_family": "file_structure",
+      "severity": "medium",
+      "score": 2.0,
+      "bbox_norm": [],
+      "metadata": {}
+    },
+    {
+      "signal_id": "fd48fe89-8689-41a9-a03b-088a35274fd6",
+      "source_document": "04_employer_declaration.pdf",
+      "detector_name": "ela",
+      "evidence_family": "visual_pixel",
+      "severity": "medium",
+      "score": 0.204,
+      "bbox_norm": [],
+      "metadata": {}
+    }
+  ],
+  "section_7_5_evidence_and_traceability": [
+    {
+      "finding_id": "ffda3f33-4865-41bc-af7e-cd6558f0d726",
+      "status": "potential_manipulation",
+      "minimal_contradiction_witnesses": [
+        {
+          "claim_id": "bd39a414-bfab-46f5-8a9c-41ff1b059ebd",
+          "document_id": "e35b8b8f-b32c-4a30-b931-c58119c502b8",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.2416,
+            0.4861,
+            0.2572
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "net_pay",
+          "raw_text": "net_pay: INR 95,000",
+          "normalized_value": "9500000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.426356+00:00",
+          "source_name": "02_salary_slip.pdf",
+          "crop_url": "/api/claims/bd39a414-bfab-46f5-8a9c-41ff1b059ebd/crop"
+        },
+        {
+          "claim_id": "cb13ea55-feee-4c68-b2ec-e22040d108e7",
+          "document_id": "abf617da-1846-4d6b-b653-0fef081be120",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.2188,
+            0.4861,
+            0.2345
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "monthly_net_pay",
+          "raw_text": "monthly_net_pay: INR 65,000",
+          "normalized_value": "6500000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.983778+00:00",
+          "source_name": "04_employer_declaration.pdf",
+          "crop_url": "/api/claims/cb13ea55-feee-4c68-b2ec-e22040d108e7/crop"
+        },
+        {
+          "claim_id": "1149be17-abbc-468a-93f9-befeacde741f",
+          "document_id": "ffe9486c-f8ef-42ce-8893-95388736133d",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.2188,
+            0.7706,
+            0.2345
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "salary_credit_row",
+          "raw_text": "04-sep-2026 northstar sal part2 25,000.00 cr",
+          "normalized_value": "2500000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.701225+00:00",
+          "source_name": "03_bank_statement.pdf",
+          "crop_url": "/api/claims/1149be17-abbc-468a-93f9-befeacde741f/crop"
+        },
+        {
+          "claim_id": "07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b",
+          "document_id": "ffe9486c-f8ef-42ce-8893-95388736133d",
+          "page_index": 0,
+          "bbox_norm": [
+            0.4118,
+            0.1961,
+            0.7191,
+            0.2117
+          ],
+          "coordinate_frame": "normalized_0_1",
+          "field_name": "salary_credit_row",
+          "raw_text": "02-sep-2026 northstar sal 40,000.00 cr",
+          "normalized_value": "4000000",
+          "datatype": "currency",
+          "unit": null,
+          "currency": null,
+          "valid_period": null,
+          "extractor": "native_pdf",
+          "extractor_version": "1.26.7",
+          "extraction_confidence": 0.95,
+          "alternatives": "[]",
+          "created_at": "2026-11-09T19:57:08.701225+00:00",
+          "source_name": "03_bank_statement.pdf",
+          "crop_url": "/api/claims/07eca83f-9c48-4c1d-8cfd-60e36ad0cb6b/crop"
+        }
+      ],
+      "reviewer_audit": {
+        "review_id": "e35e8288-45e3-48a3-ad82-48f6e836b589",
+        "finding_id": "ffda3f33-4865-41bc-af7e-cd6558f0d726",
+        "actor": "auditor_automated",
+        "action": "accept",
+        "reason": "Verified against banking credits and multi-strata forensic telemetry.",
+        "timestamp": "2026-11-09T19:57:10.027234+00:00",
+        "previous_event_hash": "e99bc7ebd7fdb26cb5bf6a3237e0d7daaaa8c775ccd2574ed80226c2282a6a17"
+      }
+    }
+  ],
+  "section_7_6_investigation_summary": {
+    "overall_conclusion": "POTENTIAL_MANIPULATION: Unresolved mathematical SMT conflict with corroborated multi-strata forensic mutations.",
+    "findings_count": 1,
+    "signals_count": 8,
+    "applicable_standards": [
+      "ISO/IEC 27037: Guidelines for identification, collection, acquisition, and preservation of digital evidence.",
+      "ISO/IEC 27041 / 27042: Guidance on assuring suitability and interpretation of digital investigative methods.",
+      "NIST SP 800-86: Guide to Integrating Forensic Techniques into Incident Response.",
+      "OWASP Machine Learning Security Top 10: Robustness, data integrity, and explainability considerations."
+    ],
+    "investigation_limitations": [
+      "OCR quality may affect extraction confidence on low-contrast, skewed, or degraded scans; raw bounding boxes are preserved.",
+      "Visual pixel signals reflect recompression and quantization variance; contextual verification is strictly required.",
+      "Z3 SMT solver evaluates domain-valid arithmetic and relational hypotheses; UNKNOWN outcomes are escalated to human review.",
+      "Human reviewer oversight is preserved for all consequential legal and credit underwriting decisions."
+    ]
+  },
+  "dossier_hash": "f1109eac54b4e71dec6463b892df16c0c440b18e257a07aeb2e5c3ac4b39c43e",
+  "dossier_integrity_hash": "f1109eac54b4e71dec6463b892df16c0c440b18e257a07aeb2e5c3ac4b39c43e"
+}

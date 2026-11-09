@@ -61,6 +61,28 @@ When claims appear inconsistent, VeriStrata formulates counterfactual hypotheses
 
 ---
 
+## 📄 Generated Forensic Dossiers (Audit Output)
+
+VeriStrata compiles tamper-evident investigation dossiers strictly adhering to **PS-2 Section 7** and **ISO/IEC 27037** digital evidence standards. Every dossier contains all 6 required sections: Document Overview, Extracted Claims, Contextual Analysis, Visual Forensics, Evidence Traceability, and Investigation Summary.
+
+| Output Artifact | Format | Classification Outcome | Direct File Link |
+| :--- | :--- | :--- | :--- |
+| **Tampered Case Dossier** | PDF (Certified) | **Potential Manipulation** (Residual: ₹30,000.00) | [veristrata_tampered_dossier.pdf](docs/reports/veristrata_tampered_dossier.pdf) |
+| **Tampered Case Ledger** | JSON (Machine-Readable) | **Potential Manipulation** (SHA-256 Merkle Chain) | [veristrata_tampered_dossier.json](docs/reports/veristrata_tampered_dossier.json) |
+| **Clean Case Dossier** | PDF (Certified) | **Observation** (Restraint Applied: ₹0.00) | [veristrata_clean_dossier.pdf](docs/reports/veristrata_clean_dossier.pdf) |
+| **Clean Case Ledger** | JSON (Machine-Readable) | **Observation** (All Hypotheses SAT) | [veristrata_clean_dossier.json](docs/reports/veristrata_clean_dossier.json) |
+
+<details>
+<summary><b>View Visual Preview of Generated PDF Report (Pages 1 & 2)</b></summary>
+
+| **Page 1: Overview, Claims & SMT Counterfactuals** | **Page 2: 4-Strata Telemetry & Merkle Chain** |
+| :---: | :---: |
+| [![Dossier Page 1](docs/screenshots/dossier_tampered_page1.png)](docs/reports/veristrata_tampered_dossier.pdf)<br/>*Case intake, integer paise normalizations, and Z3 SAT/UNSAT proofs* | [![Dossier Page 2](docs/screenshots/dossier_tampered_page2.png)](docs/reports/veristrata_tampered_dossier.pdf)<br/>*Pixel ELA findings, ISO/IEC 27037 event ledger, and final signed seal* |
+
+</details>
+
+---
+
 ## ⚡ Key Features
 
 | Forensic Detection Engine | Forensic Investigation Workbench |
