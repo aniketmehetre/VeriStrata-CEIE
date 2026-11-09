@@ -105,3 +105,4 @@ export const Inspector: React.FC<InspectorProps> = ({
     </div>
   );
 };
+

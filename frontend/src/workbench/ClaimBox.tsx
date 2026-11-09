@@ -63,3 +63,4 @@ export const ClaimBox: React.FC<ClaimBoxProps> = ({
     </button>
   );
 };
+

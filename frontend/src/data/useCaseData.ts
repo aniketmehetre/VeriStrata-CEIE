@@ -363,7 +363,7 @@ interface CaseContextValue {
 
 export const CaseContext = createContext<CaseContextValue>({
   activeCaseId: null,
-  setActiveCaseId: () => {},
+  setActiveCaseId: () => { },
 });
 
 export const useActiveCase = () => useContext(CaseContext);

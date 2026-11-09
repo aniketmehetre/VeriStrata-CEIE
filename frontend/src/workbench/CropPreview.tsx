@@ -72,3 +72,4 @@ export const CropPreview: React.FC<CropPreviewProps> = ({ claim, className = '' 
     </div>
   );
 };
+

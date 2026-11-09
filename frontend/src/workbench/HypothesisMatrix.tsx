@@ -88,3 +88,4 @@ export const HypothesisMatrix: React.FC<HypothesisMatrixProps> = ({
     </div>
   );
 };
+

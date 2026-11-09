@@ -76,3 +76,4 @@ export const AuditChain: React.FC<AuditChainProps> = ({
     </div>
   );
 };
+

@@ -106,3 +106,4 @@
   - SpotlightPanel, PaperGrain, ScrambleReveal, MagneticButton, optical grid alignment.
 - [ ] **Phase 12: Hardening & QA**
   - Zero raw palette classes, zero banned copy terms, zero confetti, unit tests passing, production build green.
+

@@ -71,3 +71,4 @@ export const ProvenanceCard: React.FC<ProvenanceCardProps> = ({
     </div>
   );
 };
+

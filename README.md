@@ -219,17 +219,27 @@ The frontend is crafted using **React 19**, **TypeScript**, **Vite**, and **Tail
    - Left: **The Clean Twin** (Demonstration of restraint: split credits verified, SAT, ₹0 residual, `Observation`).
    - Right: **The Tampered Specimen** (Demonstration of escalation: all hypotheses UNSAT, ₹30,000 residual, `Potential manipulation`).
 4. **Scene 04: Forensic Workbench Preview**
-   - 3-column forensic workbench: Evidence Shelf $\to$ 200 DPI Page Viewer with interactive precision **Loupe Magnifier** crop zoom $\to$ Z3 SMT Constraint Matrix.
+   - 3-column forensic workbench mounting the shared component library in `mode="preview"`.
+   - Evidence Shelf $\to$ 200 DPI Page Viewer with interactive precision **Loupe Magnifier** $\to$ Z3 SMT Constraint Matrix.
+   - One-click transition into the complete operational studio (`#/studio?case=...`).
 5. **Scene 05: The Seal & Signed Dossier**
    - Human reviewer adjudication interface enforcing a minimum 20-character justification.
-   - Interactive double-border circular ruby stamp with realistic tactile screen shake, updating the SHA-256 Merkle chain and exporting court dossiers.
+   - Interactive double-ring stamped seal animation (`REVIEWER CONFIRMED` in cyan, `DISMISSED / EXPLAINED` in lime) replacing confetti.
+   - Updates the SHA-256 Merkle chain and exports certified investigation dossiers.
 
-### Forensic Investigation Studio (`#/studio`)
+### Forensic Investigation Studio (`#/studio`) — Prompt Pack v3 Unified
+The full operational studio implements the **Palantir-style tiled darkroom** architecture (README Archetype A) with docked hairline panels and zero outer margins:
+* **44px Real-Time Top HUD:** Live brand mark, case breadcrumbs, 4 pipeline pills (`INGEST`, `EXTRACT`, `SOLVE`, `FINDINGS`), status pill, and one-click reviewer actions.
+* **Pan & Zoom 200 DPI Document Canvas:** Zoom 0.5x to 4x via Ctrl+wheel or +/- keys, drag-to-pan, layer chips (`Witness`, `Fields`, `Signals`), and roving keyboard focus.
+* **Live 200 DPI Precision Loupe:** 180px circle tracking pointer position at 3x to 6x native scale using CSS background magnification without extra network requests.
+* **Contradiction Compare Mode (Archetype B):** Split-screen side-by-side comparison of contradictory documents with a center discrepancy caliper (`40k + 25k ≠ 95k`) and SMT UNSAT verdict badge.
+* **Right Inspector Dock:** Count-up tabular integer paise residual (64px serif font), Z3 counterfactual matrix disclosure accordions, and native 200 DPI crop previews.
 * **Live Three.js 3D Document Canvas:** Interactive spatial orbit inspection of page surfaces.
 * **Instant Demo Runner:** One-click execution of Clean vs. Tampered demonstration bundles.
-* **Interactive Review Drawer:** Commits reviewer decisions with cryptographic hash-chaining.
-* **Official Court Dossier Downloader:** ReportLab PDF & JSON export conforming to PS-2 Section 7.
+* **Interactive Review Drawer:** Commits reviewer decisions with cryptographic hash-chaining and stamped seal animations.
+* **Certified Dossier Downloader:** ReportLab PDF & JSON export conforming to PS-2 Section 7.
 * 📖 **In-Depth Workbench Architecture & Redesign Guide:** For an exhaustive technical breakdown of state, 3-column layouts, coordinate normalization math, 200 DPI canvas, and recipes for redesigning the UI, see [**`docs/WORKBENCH_UI_ARCHITECTURE.md`**](docs/WORKBENCH_UI_ARCHITECTURE.md).
+* 📋 **Workbench Unification Plan:** For the complete audit and component extraction breakdown, see [**`UNIFY-PLAN.md`**](UNIFY-PLAN.md).
 
 ### Global Command Palette (<kbd>Ctrl+K</kbd> / <kbd>Cmd+K</kbd>)
 * Accessible from anywhere in the application. Jump to any scene, launch demo cases, open workbench views, or export dossiers instantaneously.
@@ -562,15 +572,34 @@ VeriStrata-CEIE/
 ├── docs/
 │   ├── DEMO_SCRIPT.md                # 2-minute judge walkthrough pitch script
 │   └── WORKBENCH_UI_ARCHITECTURE.md  # Exhaustive Workbench UI architecture & LLM redesign blueprint
+├── UNIFY-PLAN.md                     # Workbench unification audit and component extraction plan
 ├── frontend/
 │   ├── src/
-│   │   ├── components/               # Workbench views, Three.js 3D canvas, Navbar, Modals
+│   │   ├── workbench/                # Unified forensic workbench shared component library
+│   │   │   ├── WorkbenchShell.tsx    # 44px Top HUD, collapsible docks, zero-outer-margin darkroom shell
+│   │   │   ├── DocumentStage.tsx     # 200 DPI canvas, pan/zoom (0.5x-4x), live loupe, reticle boxes
+│   │   │   ├── ClaimBox.tsx          # Accessible <button> reticle with 10px corner brackets
+│   │   │   ├── ContradictionCompare.tsx # Split-stage side-by-side comparison with residual caliper
+│   │   │   ├── EvidenceShelf.tsx     # Bundle document list & upload dropzone
+│   │   │   ├── DocumentCard.tsx      # Individual document item card with status dot
+│   │   │   ├── ProvenanceCard.tsx    # MIME type, page count, classifier confidence, SHA-256 chip
+│   │   │   ├── WitnessPanel.tsx      # Minimal contradiction witness claims
+│   │   │   ├── ResidualCallout.tsx   # Large serif residual amount (tabular count-up)
+│   │   │   ├── HypothesisMatrix.tsx  # Z3 counterfactual disclosure accordions (SUPPORTED/REJECTED)
+│   │   │   ├── SignalList.tsx        # Multi-strata pixel & typographical signal cards
+│   │   │   ├── CropPreview.tsx       # Native 200 DPI PNG crop image with metadata
+│   │   │   ├── AuditChain.tsx        # Cryptographic SHA-256 chain dock with in-browser verification
+│   │   │   ├── StatusPill.tsx        # Standardized status badge using statusStyles tokens
+│   │   │   └── Inspector.tsx         # Right dock grouping Witness, Residual, Hypotheses, Review CTA
+│   │   ├── components/               # Operational Studio, Dashboard, Three.js 3D canvas, Navbar, Modals
+│   │   ├── data/
+│   │   │   └── useCaseData.ts        # Parallel case data hook with polling backoff & offline fixtures
 │   │   ├── story/                    # The Autopsy Table 5-scene scroll story
 │   │   │   └── scenes/               # Specimen, Layers, Trial, Studio, Seal scenes
 │   │   ├── ui/                       # Buttons, Chips, Kicker, PaperSheet, VerdictChip
 │   │   │   ├── interactions/         # EvidenceCursor, HashTicker, PaperGrain, MagneticButton
 │   │   │   └── vendor/               # CommandPalette (Ctrl+K), Dialog, Drawer, Tabs
-│   │   ├── lib/                      # Currency formatting (integer paise to INR), Motion curves
+│   │   ├── lib/                      # bboxToCss, formatPaise (integer paise), statusStyles tokens
 │   │   ├── App.tsx                   # Master router (#/, #/studio, #/styleguide)
 │   │   ├── index.css                 # TailwindCSS v4 @theme tokens
 │   │   └── main.tsx                  # React 19 entry point
