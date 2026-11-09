@@ -125,7 +125,7 @@ export const SealScene: React.FC<SealSceneProps> = ({ onOpenDossierModal }) => {
               rows={3}
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              placeholder="Enter court-admissible forensic justification..."
+              placeholder="Enter investigator forensic justification..."
               className="w-full bg-[#07090c] text-xs text-[#e8e6df] font-mono border border-[#1f2733] focus:border-[#c6f432] rounded-xl p-3 focus:outline-none resize-none"
             />
           </div>
@@ -167,7 +167,7 @@ export const SealScene: React.FC<SealSceneProps> = ({ onOpenDossierModal }) => {
             <div className="border-b-2 border-[#14120d] pb-2 flex justify-between items-center">
               <div>
                 <div className="font-extrabold text-sm tracking-wider">INVESTIGATION DOSSIER</div>
-                <div className="text-[9px] text-[#5c5446]">ISO/IEC 27037 COURT SPECIFICATION</div>
+                <div className="text-[9px] text-[#5c5446]">ALIGNED WITH PRINCIPLES OF ISO/IEC 27037</div>
               </div>
               <div className="text-right text-[10px] text-[#5c5446]">
                 CASE 20ACA934<br />
@@ -249,7 +249,7 @@ export const SealScene: React.FC<SealSceneProps> = ({ onOpenDossierModal }) => {
           })}
         >
           <Download className="w-4 h-4 mr-2" />
-          <span>Export Full Court Dossier (PDF & JSON)</span>
+          <span>Export Full Investigation Dossier (PDF & JSON)</span>
         </Btn>
       </div>
     </section>

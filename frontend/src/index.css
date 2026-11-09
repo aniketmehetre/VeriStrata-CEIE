@@ -103,6 +103,22 @@
   font-family: 'Instrument Serif', Georgia, serif;
 }
 
+/* Darkroom Tiled Panels */
+.panel {
+  background-color: var(--color-panel);
+  border: 1px solid var(--color-line);
+}
+
+.panel-2 {
+  background-color: var(--color-panel-2);
+  border: 1px solid var(--color-line-strong);
+}
+
+.panel-alert {
+  background-color: rgba(255, 77, 106, 0.08);
+  border: 1px solid rgba(255, 77, 106, 0.4);
+}
+
 /* 3D Transform Utilities */
 .preserve-3d {
   transform-style: preserve-3d;

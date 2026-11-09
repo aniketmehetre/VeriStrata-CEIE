@@ -47,7 +47,7 @@ export const LayersScene: React.FC = () => {
             <Kicker>02 / ONE COORDINATE, FOUR WITNESSES</Kicker>
 
             <h2 className="serif-display text-4xl sm:text-6xl text-[#e8e6df] leading-[0.98]">
-              A forgery has to lie on{' '}
+              An alteration has to lie on{' '}
               <span className="italic text-[#ff4d6a]">every layer at once.</span>
             </h2>
 

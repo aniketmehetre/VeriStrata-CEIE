@@ -74,7 +74,7 @@ export const ForensicScanline: React.FC<ForensicScanlineProps> = ({ scanning = t
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
       <div
         ref={lineRef}
-        className="w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#00f0ff]"
+        className="w-full h-[2px] bg-gradient-to-r from-transparent via-cyan to-transparent shadow-[0_0_15px_var(--color-cyan)]"
       />
     </div>
   );

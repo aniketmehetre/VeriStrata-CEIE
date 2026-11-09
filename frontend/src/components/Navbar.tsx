@@ -24,24 +24,24 @@ export const Navbar: React.FC<NavbarProps> = ({
   loadingDemo,
 }) => {
   return (
-    <header className="sticky top-0 z-50 w-full glass-panel border-b border-cyan-500/15 px-4 lg:px-8 py-3 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 w-full bg-panel border-b border-line px-4 lg:px-8 py-2.5 backdrop-blur-xl">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 font-mono text-xs">
         {/* Left: Brand Identity */}
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/30 border border-cyan-400/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-            <Shield className="w-5 h-5 text-cyan-300" />
-            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse border-2 border-slate-900" />
+          <div className="relative flex items-center justify-center w-8 h-8 rounded-panel bg-cyan/15 border border-cyan/40 shadow-[0_0_12px_rgba(92,225,230,0.3)]">
+            <Shield className="w-4 h-4 text-cyan" />
+            <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-lime animate-pulse border-2 border-ground" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent">
+              <span className="font-bold text-base tracking-tight text-text">
                 VeriStrata
               </span>
-              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 mono">
-                CEIE v1.1
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-panel-2 border border-line text-cyan">
+                CEIE
               </span>
             </div>
-            <p className="text-[10px] text-slate-400 mono hidden sm:block">
+            <p className="text-[10px] text-dim hidden sm:block">
               Counterfactual Evidence Investigation Engine
             </p>
           </div>
@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <select
             value={currentCaseId || ''}
             onChange={(e) => onSelectCase(e.target.value)}
-            className="w-full bg-slate-900/90 text-xs text-slate-200 border border-slate-700/80 rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-400 mono transition-all"
+            className="w-full bg-ground text-xs text-text border border-line rounded-panel px-3 py-1.5 focus:outline-none focus:border-cyan transition-colors"
           >
             <option value="" disabled>
               Select Investigation Case...
@@ -68,31 +68,33 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Right: Instant Demos & Actions */}
         <div className="flex items-center gap-2">
           {/* Health Pill */}
-          <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-[11px] mono">
-            <Activity className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="text-slate-400">SMT Z3:</span>
-            <span className="text-emerald-400 font-semibold">{health?.solver || 'ok'}</span>
+          <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded bg-panel-2 border border-line text-[11px]">
+            <Activity className="w-3.5 h-3.5 text-lime" />
+            <span className="text-dim">SMT:</span>
+            <span className="text-lime font-bold">{health?.solver || 'ok'}</span>
           </div>
 
           {/* Quick Demo Clean Button (Restraint) */}
           <button
+            type="button"
             onClick={() => onLaunchDemo('clean')}
             disabled={loadingDemo}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 transition-all shadow-[0_0_12px_rgba(16,185,129,0.15)] active:scale-95 disabled:opacity-50"
+            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-panel text-xs font-semibold bg-lime/15 hover:bg-lime/25 border border-lime/40 text-lime transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-50"
             title="Demonstrates mathematical restraint: split credit matches salary"
           >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <Sparkles className="w-3.5 h-3.5 text-lime" />
             <span>Clean Demo</span>
           </button>
 
           {/* Quick Demo Tampered Button (Escalation) */}
           <button
+            type="button"
             onClick={() => onLaunchDemo('tampered')}
             disabled={loadingDemo}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 transition-all shadow-[0_0_12px_rgba(244,63,94,0.15)] active:scale-95 disabled:opacity-50"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-panel text-xs font-semibold bg-ruby/15 hover:bg-ruby/25 border border-ruby/40 text-ruby-text transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-50"
             title="Demonstrates counterfactual conflict detection: INR 95k vs 65k"
           >
-            <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+            <AlertTriangle className="w-3.5 h-3.5 text-ruby" />
             <span className="hidden md:inline">Tampered Demo</span>
             <span className="md:hidden">Demo</span>
           </button>
@@ -100,18 +102,20 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Dossier Trigger */}
           {currentCaseId && (
             <button
+              type="button"
               onClick={onOpenDossier}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 transition-all shadow-[0_0_15px_rgba(6,182,212,0.2)] active:scale-95"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-panel text-xs font-semibold bg-cyan/15 hover:bg-cyan/25 border border-cyan/40 text-cyan transition-all cursor-pointer shadow-sm active:scale-95"
             >
-              <FileText className="w-3.5 h-3.5 text-cyan-300" />
+              <FileText className="w-3.5 h-3.5 text-cyan" />
               <span className="hidden sm:inline">Dossier</span>
             </button>
           )}
 
           {/* New Case Button */}
           <button
+            type="button"
             onClick={onOpenNewCase}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-panel text-xs font-semibold bg-panel-2 hover:bg-ground text-text border border-line transition-all cursor-pointer active:scale-95"
           >
             <PlusCircle className="w-3.5 h-3.5" />
             <span className="hidden md:inline">New Case</span>

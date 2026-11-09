@@ -38,12 +38,28 @@ export function App() {
   const [loadingDemo, setLoadingDemo] = useState(false);
   const [demoBanner, setDemoBanner] = useState<string | null>(null);
 
-  // Sync hash routing
+  // Sync hash routing & query params
   useEffect(() => {
     const handleHashChange = () => {
-      setRoute(window.location.hash || '#/');
+      const currentHash = window.location.hash || '#/';
+      setRoute(currentHash);
+
+      if (currentHash.startsWith('#/studio')) {
+        const hashParts = currentHash.split('?');
+        if (hashParts.length > 1) {
+          const params = new URLSearchParams(hashParts[1]);
+          const caseParam = params.get('case');
+          if (caseParam) {
+            setCurrentCaseId(caseParam);
+            setCurrentView('studio');
+          }
+        } else {
+          setCurrentView('studio');
+        }
+      }
     };
     window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
@@ -229,7 +245,7 @@ export function App() {
     },
     {
       id: 'export-dossier',
-      title: 'Export Court Investigation Dossier (PDF & JSON)',
+      title: 'Export Investigation Dossier (PDF & JSON)',
       category: 'Dossier',
       icon: FileText,
       shortcut: 'D',
@@ -265,7 +281,7 @@ export function App() {
   }
 
   // 2. Full Studio Route
-  if (route === '#/studio') {
+  if (route.startsWith('#/studio')) {
     return (
       <div className="relative min-h-screen bg-[#07090c] text-[#e8e6df] autopsy-grid overflow-x-hidden">
         <Navbar

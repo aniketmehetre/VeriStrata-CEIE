@@ -480,3 +480,4 @@ When modifying or restyling the Workbench UI, follow this sequence:
    npm run build
    ```
    Ensure no TypeScript compilation or Tailwind syntax errors occur.
+

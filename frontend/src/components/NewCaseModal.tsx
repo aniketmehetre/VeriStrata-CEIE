@@ -81,7 +81,7 @@ export const NewCaseModal: React.FC<NewCaseModalProps> = ({ isOpen, onClose, onC
               >
                 <option value="LOAN_APPLICATION">LOAN_APPLICATION (Retail / SME Lending)</option>
                 <option value="INSURANCE_CLAIM">INSURANCE_CLAIM (Medical / Property)</option>
-                <option value="VENDOR_INVOICE">VENDOR_INVOICE (Procurement / AP Fraud)</option>
+                <option value="VENDOR_INVOICE">VENDOR_INVOICE (Procurement / AP Discrepancy)</option>
               </select>
             </div>
 

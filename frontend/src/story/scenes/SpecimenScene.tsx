@@ -68,7 +68,7 @@ export const SpecimenScene: React.FC<SpecimenSceneProps> = ({
           </h1>
 
           <p className="text-[#aab4c2] text-lg sm:text-xl font-sans leading-relaxed max-w-xl">
-            VeriStrata tests legitimate hypotheses before raising a single alarm. One forged
+            VeriStrata tests legitimate hypotheses before raising a single alarm. One tampered
             salary slip is dissected across pixel, typography, and mathematical layers
             using Z3 SMT theorem proving.
           </p>
@@ -82,7 +82,7 @@ export const SpecimenScene: React.FC<SpecimenSceneProps> = ({
                   document.getElementById('scene-1')?.scrollIntoView({ behavior: 'smooth' });
                 })}
               >
-                Dissect the forged slip
+                Dissect the tampered slip
               </Btn>
             </MagneticButton>
 
@@ -98,7 +98,7 @@ export const SpecimenScene: React.FC<SpecimenSceneProps> = ({
           </div>
         </div>
 
-        {/* Right Column: Specimen Slip (The Forgery) */}
+        {/* Right Column: Specimen Slip (The Tampered Specimen) */}
         <div className="lg:col-span-5 relative flex justify-center perspective-1600 py-6">
           {/* Floating Chips around Specimen */}
           <div className="absolute -top-6 left-0 z-30 hidden sm:block">
@@ -168,7 +168,7 @@ export const SpecimenScene: React.FC<SpecimenSceneProps> = ({
                   <span className="font-bold">₹65,000.00</span>
                 </div>
 
-                {/* Forged Row with Font Anomaly */}
+                {/* Tampered Row with Font Anomaly */}
                 <div className="mt-4 p-3 rounded bg-[#ff4d6a]/12 border-2 border-[#ff4d6a] relative">
                   <div className="flex items-center justify-between">
                     <div>
