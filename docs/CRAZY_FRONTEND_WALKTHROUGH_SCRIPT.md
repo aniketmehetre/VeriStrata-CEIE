@@ -173,3 +173,4 @@ If you want to manually click through the entire experience at your own pace:
   - Press <kbd>D</kbd> to open the **Cryptographic Export Modal**.
 - [ ] **Step 4: Automated Autopilot Demonstration**
   - Hit <kbd>P</kbd> at any point to show off the fully automated camera-directed guided tour!
+
