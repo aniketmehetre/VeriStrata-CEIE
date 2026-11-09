@@ -9,14 +9,15 @@ import { HashTicker } from '../ui/interactions/HashTicker';
 import { PaperGrain } from '../ui/interactions/PaperGrain';
 import { EvidenceCursor } from '../ui/interactions/EvidenceCursor';
 import { Btn } from '../ui/Btn';
-import { Shield, ExternalLink } from 'lucide-react';
+import { Shield, ExternalLink, Upload } from 'lucide-react';
 
 export interface StoryPageProps {
   onOpenStudio?: () => void;
   onOpenDossier?: () => void;
+  onUploadFiles?: (files: File[]) => void;
 }
 
-export const StoryPage: React.FC<StoryPageProps> = ({ onOpenStudio, onOpenDossier }) => {
+export const StoryPage: React.FC<StoryPageProps> = ({ onOpenStudio, onOpenDossier, onUploadFiles }) => {
   return (
     <div className="relative w-full bg-[#07090c] text-[#e8e6df] overflow-x-hidden select-none">
       {/* Precision Micro-Interactions */}
@@ -39,8 +40,26 @@ export const StoryPage: React.FC<StoryPageProps> = ({ onOpenStudio, onOpenDossie
           </div>
         </div>
 
-        {/* Skip to Studio Action */}
+        {/* Actions: Direct Upload + Skip to Studio */}
         <div className="flex items-center gap-3">
+          {onUploadFiles && (
+            <label className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#5ce1e6]/15 hover:bg-[#5ce1e6]/25 border-2 border-[#5ce1e6] text-[#5ce1e6] hover:text-white font-mono text-xs font-bold cursor-pointer transition-all shadow-[0_0_15px_rgba(92,225,230,0.35)] active:scale-95 animate-pulse">
+              <Upload className="w-4 h-4" />
+              <span>UPLOAD & AUTO-DOWNLOAD REPORT</span>
+              <input
+                type="file"
+                multiple
+                accept=".pdf"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    onUploadFiles(Array.from(e.target.files));
+                  }
+                }}
+                className="hidden"
+              />
+            </label>
+          )}
+
           <Btn
             variant="ghost"
             size="sm"

@@ -14,6 +14,7 @@ interface EvidenceShelfProps {
   uploading?: boolean;
   onSelectDoc: (id: string) => void;
   onUpload?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onUploadAndDownload?: (files: File[]) => void;
   className?: string;
 }
 
@@ -26,6 +27,7 @@ export const EvidenceShelf: React.FC<EvidenceShelfProps> = ({
   uploading = false,
   onSelectDoc,
   onUpload,
+  onUploadAndDownload,
   className = '',
 }) => {
   const activeDoc = documents.find((d) => d.document_id === selectedDocId) || documents[0];
@@ -39,6 +41,32 @@ export const EvidenceShelf: React.FC<EvidenceShelfProps> = ({
             {documents.length} Files
           </span>
         </div>
+
+        {/* Prominent Top Upload Action */}
+        {(onUploadAndDownload || onUpload) && (
+          <div className="mb-3">
+            <label className="flex items-center justify-center gap-2 w-full p-2.5 rounded-panel border-2 border-[#5ce1e6] bg-[#5ce1e6]/15 hover:bg-[#5ce1e6]/25 text-[#5ce1e6] hover:text-white text-xs font-mono font-bold cursor-pointer transition-all shadow-[0_0_12px_rgba(92,225,230,0.3)] animate-pulse">
+              <Upload className="w-4 h-4" />
+              <span>{uploading ? 'Analyzing...' : 'UPLOAD FILES ➔ GET REPORT'}</span>
+              <input
+                type="file"
+                multiple
+                accept=".pdf"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    if (onUploadAndDownload) {
+                      onUploadAndDownload(Array.from(e.target.files));
+                    } else if (onUpload) {
+                      onUpload(e);
+                    }
+                  }
+                }}
+                className="hidden"
+                disabled={uploading}
+              />
+            </label>
+          </div>
+        )}
 
         <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
           {documents.map((doc) => {

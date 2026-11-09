@@ -7,6 +7,7 @@ import {
   ChevronRight,
   RefreshCw,
   FolderOpen,
+  Upload,
 } from 'lucide-react';
 
 interface WorkbenchShellProps {
@@ -16,6 +17,7 @@ interface WorkbenchShellProps {
   primaryFinding: Finding | null;
   analyzing?: boolean;
   onAnalyze?: () => void;
+  onDirectUpload?: (files: File[]) => void;
   onOpenReviewer?: () => void;
   onOpenDossier?: () => void;
   onBackToCases?: () => void;
@@ -32,6 +34,7 @@ export const WorkbenchShell: React.FC<WorkbenchShellProps> = ({
   primaryFinding,
   analyzing = false,
   onAnalyze,
+  onDirectUpload,
   onOpenReviewer,
   onOpenDossier,
   onBackToCases,
@@ -113,6 +116,26 @@ export const WorkbenchShell: React.FC<WorkbenchShellProps> = ({
 
         {/* Right: Status Pill & Actions */}
         <div className="flex items-center gap-2.5">
+          {/* Direct Upload & Auto-Download Report */}
+          {onDirectUpload && (
+            <label className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#5ce1e6]/15 hover:bg-[#5ce1e6]/25 border border-[#5ce1e6] text-[#5ce1e6] hover:text-white font-mono text-xs font-bold cursor-pointer transition-all shadow-[0_0_12px_rgba(92,225,230,0.3)] active:scale-95 animate-pulse">
+              <Upload className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">UPLOAD & DOWNLOAD REPORT</span>
+              <span className="sm:hidden">UPLOAD</span>
+              <input
+                type="file"
+                multiple
+                accept=".pdf"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    onDirectUpload(Array.from(e.target.files));
+                  }
+                }}
+                className="hidden"
+              />
+            </label>
+          )}
+
           <StatusPill status={primaryFinding?.status || currentCase.status} size="sm" />
 
           {/* Quick Re-run Pipeline */}

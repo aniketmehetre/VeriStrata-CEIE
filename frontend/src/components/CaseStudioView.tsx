@@ -18,6 +18,7 @@ interface CaseStudioViewProps {
   onOpenReviewDrawer: (finding: Finding) => void;
   onOpenDossier: () => void;
   onBackToDashboard: () => void;
+  onDirectUpload?: (files: File[]) => void;
 }
 
 export const CaseStudioView: React.FC<CaseStudioViewProps> = ({
@@ -25,6 +26,7 @@ export const CaseStudioView: React.FC<CaseStudioViewProps> = ({
   onOpenReviewDrawer,
   onOpenDossier,
   onBackToDashboard,
+  onDirectUpload,
 }) => {
   const {
     documents,
@@ -132,6 +134,7 @@ export const CaseStudioView: React.FC<CaseStudioViewProps> = ({
         primaryFinding={primaryFinding}
         analyzing={analyzing}
         onAnalyze={handleAnalyze}
+        onDirectUpload={onDirectUpload}
         onOpenReviewer={() => primaryFinding && onOpenReviewDrawer(primaryFinding)}
         onOpenDossier={onOpenDossier}
         onBackToCases={onBackToDashboard}
@@ -145,6 +148,7 @@ export const CaseStudioView: React.FC<CaseStudioViewProps> = ({
             uploading={uploading}
             onSelectDoc={setSelectedDocId}
             onUpload={handleFileUpload}
+            onUploadAndDownload={onDirectUpload}
           />
         }
         centerStage={

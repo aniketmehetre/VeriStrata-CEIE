@@ -12,7 +12,7 @@ import { CommandPalette } from './ui/vendor/CommandPalette';
 import { GuidedAutopilot } from './ui/interactions/GuidedAutopilot';
 import type { CommandAction } from './ui/vendor/CommandPalette';
 import type { Case, HealthInfo, Finding } from './types';
-import { fetchCases, fetchHealth, createDemoCase } from './api';
+import { fetchCases, fetchHealth, createDemoCase, uploadAndAutoDownloadReport } from './api';
 import {
   Compass,
   FileText,
@@ -133,6 +133,31 @@ export function App() {
       console.error(err);
       setDemoBanner('Failed to execute demo bundle.');
       setTimeout(() => setDemoBanner(null), 4000);
+    } finally {
+      setLoadingDemo(false);
+    }
+  };
+
+  // Direct Upload Files & Auto-Download Certified Dossier
+  const handleGlobalUploadAndDownload = async (files: File[]) => {
+    setLoadingDemo(true);
+    setDemoBanner(`Ingesting ${files.length} document(s)... Initializing 4-Strata Forensics...`);
+
+    try {
+      const res = await uploadAndAutoDownloadReport(files, (msg) => {
+        setDemoBanner(msg);
+      });
+      const updatedCases = await fetchCases();
+      setCases(updatedCases);
+      setCurrentCaseId(res.caseId);
+      window.location.hash = '#/studio';
+      setCurrentView('studio');
+      setDemoBanner(`✓ Forensics Complete! Certified Dossier PDF Downloaded.`);
+      setTimeout(() => setDemoBanner(null), 6000);
+    } catch (err: any) {
+      console.error(err);
+      setDemoBanner(`Upload failed: ${err.message || err}`);
+      setTimeout(() => setDemoBanner(null), 5000);
     } finally {
       setLoadingDemo(false);
     }
@@ -351,6 +376,7 @@ export function App() {
               onOpenReviewDrawer={handleOpenReview}
               onOpenDossier={() => setIsDossierOpen(true)}
               onBackToDashboard={() => setCurrentView('dashboard')}
+              onDirectUpload={handleGlobalUploadAndDownload}
             />
           )}
         </main>
@@ -402,11 +428,18 @@ export function App() {
   // 3. Default: The Autopsy Table Scroll Story
   return (
     <>
+      {demoBanner && (
+        <div className="fixed top-18 left-1/2 -translate-x-1/2 z-50 max-w-xl w-[90%] p-3 rounded-xl bg-[#0e1218]/95 border-2 border-[#5ce1e6] text-center font-mono text-xs text-[#5ce1e6] shadow-[0_0_30px_rgba(92,225,230,0.5)] animate-bounce">
+          {demoBanner}
+        </div>
+      )}
+
       <StoryPage
         onOpenStudio={() => {
           window.location.hash = '#/studio';
         }}
         onOpenDossier={() => setIsDossierOpen(true)}
+        onUploadFiles={handleGlobalUploadAndDownload}
       />
 
       {/* Floating Command Trigger on Story */}

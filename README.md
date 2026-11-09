@@ -44,13 +44,20 @@ When claims appear inconsistent, VeriStrata formulates counterfactual hypotheses
 
 ## 📸 Screenshots & Interface Tour
 
-Placeholders for interface screenshots located in `docs/screenshots/`:
-
-| 5-Scene Autopsy Landing (`docs/screenshots/story_page.png`) | Unified Forensic Studio (`docs/screenshots/studio_workbench.png`) |
+| **Scene 01: Hero Specimen Dissection** | **Scene 02: 4-Strata Forensic Convergence** |
 | :---: | :---: |
-| *<TODO: Add screenshot of 3D tilted specimen & exploded strata>* | *<TODO: Add screenshot of 200 DPI canvas & precision loupe>* |
-| **Contradiction Compare (`docs/screenshots/contradiction_compare.png`)** | **Certified Dossier (`docs/screenshots/dossier_export.png`)** |
-| *<TODO: Add screenshot of caliper line proving 40k + 25k ≠ 95k>* | *<TODO: Add screenshot of ISO/IEC 27037 export with Merkle seal>* |
+| [![Hero Specimen](docs/screenshots/hero_specimen.png)](docs/screenshots/hero_specimen.png)<br/>*3D tilted specimen table exposing inline font substitution on the ₹95,000 row* | [![Four Strata Layers](docs/screenshots/four_strata_layers.png)](docs/screenshots/four_strata_layers.png)<br/>*One coordinate pierced across PDF DOM, ELA quantization, Typography, and SMT* |
+| **Scene 03: The Trial (Mathematical Restraint)** | **Scene 05: Merkle Seal & Certified Dossier** |
+| [![The Trial Slider](docs/screenshots/the_trial_slider.png)](docs/screenshots/the_trial_slider.png)<br/>*Clean Twin (SAT, ₹0 residual) vs. Tampered Specimen (UNSAT, ₹30,000 residual)* | [![Dossier Merkle Seal](docs/screenshots/dossier_merkle_seal.png)](docs/screenshots/dossier_merkle_seal.png)<br/>*ISO/IEC 27037 human review sign-off, SHA-256 hash chain & certified export* |
+
+<details>
+<summary><b>View Forensic Investigation Workbench (Scene 04)</b></summary>
+
+| **Scene 04: Forensic Investigation Workbench** |
+| :---: |
+| [![Workbench Studio](docs/screenshots/workbench_studio.png)](docs/screenshots/workbench_studio.png)<br/>*Palantir-style darkroom workbench with 200 DPI specimen canvas and Z3 Counterfactual Matrix* |
+
+</details>
 
 ---
 

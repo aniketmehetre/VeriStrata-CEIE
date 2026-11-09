@@ -71,3 +71,4 @@ All monetary parameters are expressed in **integer paise** ($1\text{ INR} = 100\
 | :--- | :--- | :--- |
 | `GET` | `/report/{case_id}` | Standalone server-rendered HTML forensic report |
 | `GET` | `/cases/{case_id}/workbench` | Alternate route for server-rendered investigation workbench |
+

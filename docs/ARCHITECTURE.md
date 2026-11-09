@@ -71,3 +71,4 @@ Every forensic extraction, signal evaluation, and human reviewer action is appen
 $$H_i = \text{SHA-256}(\text{EventID}_i \parallel \text{Action}_i \parallel \text{Reason}_i \parallel \text{Timestamp}_i \parallel H_{i-1})$$
 
 Retroactive modification of any historical review event invalidates all downstream hash chains, guaranteeing verifiable provenance.
+

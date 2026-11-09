@@ -200,6 +200,7 @@ async def run(bundle_choice: str, auto_open: bool):
         header("🎯 DEMO EXECUTION COMPLETE — ALL ARTIFACTS GENERATED")
 
         last_res = results[-1]
+        live_guided_demo_url = "http://127.0.0.1:5173/#/?demo=auto"
         workbench_html_url = f"http://localhost:8000/report/{last_res['case_id']}"
         workbench_studio_url = f"http://127.0.0.1:5173/#/studio"
         autopsy_story_url = f"http://127.0.0.1:5173/#/"
@@ -210,19 +211,19 @@ async def run(bundle_choice: str, auto_open: bool):
             print(f"  • {r['bundle_type'].upper()} JSON: {C_CYAN}{r['json_path']}{C_RESET}")
 
         print(f"\n{C_BOLD}Interactive Workbench & Investigation Links:{C_RESET}")
-        print(f"  👉 Standalone Forensic Report : {C_GREEN}{workbench_html_url}{C_RESET}")
-        print(f"  👉 Unified Studio Darkroom    : {C_GREEN}{workbench_studio_url}{C_RESET}")
-        print(f"  👉 5-Scene Autopsy Storyline  : {C_GREEN}{autopsy_story_url}{C_RESET}")
-        print(f"  👉 Backend REST API Docs      : {C_GREEN}http://127.0.0.1:8000/docs{C_RESET}")
+        print(f"  👉 🌟 LIVE GUIDED AUTOPILOT DEMO : {C_GREEN}{live_guided_demo_url}{C_RESET}")
+        print(f"  👉 Standalone Forensic Report     : {C_GREEN}{workbench_html_url}{C_RESET}")
+        print(f"  👉 Unified Studio Darkroom        : {C_GREEN}{workbench_studio_url}{C_RESET}")
+        print(f"  👉 5-Scene Autopsy Storyline      : {C_GREEN}{autopsy_story_url}{C_RESET}")
+        print(f"  👉 Backend REST API Docs          : {C_GREEN}http://127.0.0.1:8000/docs{C_RESET}")
 
         if auto_open:
-            print(f"\n{C_YELLOW}🌐 Automatically launching Forensic Workbench in your browser...{C_RESET}")
+            print(f"\n{C_YELLOW}🌐 Automatically launching Live Guided Demo in your browser...{C_RESET}")
             try:
-                # Open React Studio
-                webbrowser.open(workbench_studio_url)
-                # Open Standalone HTML Report
-                webbrowser.open(workbench_html_url)
+                # Open Live Guided Tour in Frontend
+                webbrowser.open(live_guided_demo_url)
                 # Open PDF dossier with default OS viewer
+                time.sleep(1)
                 if sys.platform.startswith("win"):
                     os.startfile(str(last_res["pdf_path"]))
                 elif sys.platform.startswith("darwin"):
@@ -247,3 +248,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

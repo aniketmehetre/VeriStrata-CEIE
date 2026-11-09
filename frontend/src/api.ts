@@ -169,3 +169,44 @@ export async function fetchDossierJson(caseId: string): Promise<any> {
 export function getDossierPdfUrl(caseId: string): string {
   return `${BASE_URL}/api/cases/${caseId}/dossier?format=pdf`;
 }
+
+export async function uploadAndAutoDownloadReport(
+  files: File[],
+  onStatusUpdate?: (stage: string) => void
+): Promise<{ caseId: string; pdfUrl: string }> {
+  onStatusUpdate?.('Initializing Case...');
+  const newCase = await createCase('auditor_ui');
+  const caseId = newCase.case_id;
+
+  onStatusUpdate?.(`Ingesting ${files.length} document(s)...`);
+  await uploadDocuments(caseId, files);
+
+  onStatusUpdate?.('Running 4-Strata Forensics & Z3 SMT Solver...');
+  await startAnalysis(caseId);
+
+  // Poll until complete
+  let attempts = 0;
+  while (attempts < 60) {
+    await new Promise((r) => setTimeout(r, 600));
+    try {
+      const st = await fetchCaseStatus(caseId);
+      if (st.status === 'complete') break;
+    } catch {
+      // ignore transient poll error
+    }
+    attempts++;
+  }
+
+  onStatusUpdate?.('Downloading Certified Court Dossier (PDF)...');
+  const pdfUrl = getDossierPdfUrl(caseId);
+
+  // Trigger browser download
+  const link = document.createElement('a');
+  link.href = pdfUrl;
+  link.download = `veristrata_court_dossier_${caseId}.pdf`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  return { caseId, pdfUrl };
+}
